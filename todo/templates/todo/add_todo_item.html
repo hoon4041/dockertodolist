@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-do 항목 추가</title>
+</head>
+<body>
+    <h1>To-do 항목 추가</h1>
+    <form method="POST">
+        {% csrf_token %}
+        제목: <input type="text" name="title" required><br>
+        설명: <textarea name="description"></textarea><br>
+        기한: <input type="datetime-local" name="due_date" value="{{ due_date }}"><br>
+        <input type="submit" value="추가">
+    </form>
+    <a href="{% url 'calendar_view' %}">돌아가기</a>
+</body>
+</html>

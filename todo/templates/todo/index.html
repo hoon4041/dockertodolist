@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-do List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+
+</head>
+<body>
+    <h1>To-do List</h1>
+    <ul>
+        {% for item in todo_items %}
+            <li>
+                {% if item.completed %}
+                    <del>{{ item.title }}</del>
+                {% else %}
+                    {{ item.title }}
+                {% endif %}
+                <a href="{% url 'toggle_todo_item' item.id %}">[완료 토글]</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_todo_item' %}">추가</a>
+</body>
+</html>

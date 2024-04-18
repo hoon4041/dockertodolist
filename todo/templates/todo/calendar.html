@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-do Calendar</title>
+    <!-- fullcalendar.js 라이브러리 추가 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+</head>
+<body>
+    <h1>To-do Calendar</h1>
+    <div id="calendar"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: {{ events|safe }},
+                dateClick: function(info) {
+                    // 날짜를 선택했을 때 To-do 항목을 추가할 수 있는 폼을 표시합니다.
+                    addTodoItem(info.dateStr);
+                },
+                eventClick: function(info) {
+                    window.location.href = info.event.url;
+                }
+            });
+            calendar.render();
+        });
+        function addTodoItem(date) {
+            // 선택한 날짜를 포함하여 새로운 창 또는 모달로 폼을 표시합니다.
+            var addUrl = `/add/?due_date=${date}`;
+            window.location.href = addUrl;
+        }
+    </script>
+</body>
+</html>
